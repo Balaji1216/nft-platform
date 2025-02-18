@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFT Platform</title>
+    <!-- FontAwesome CDN for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            height: 80px;
+            background-color: white;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.5em;
+            color: black;
+        }
+
+        .nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav a {
+            color: black;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 5px 10px;
+            transition: all 0.3s ease;
+        }
+
+        .nav a:hover {
+            background-color: #C0C0C0;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .hero h1 {
+    font-size: 3.5em; /* Increase font size */
+    font-weight: bold; /* Make the text bold */
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.5em; /* Increase the size of the paragraph text as well */
+    margin-bottom: 30px;
+    color: #666;
+}
+
+
+        .hero button {
+            background-color: #010912;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .hero button:hover {
+            background-color: #010912;
+        }
+
+        .art-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 20px;
+        }
+
+        .art-section h2 {
+            margin-bottom: 30px;
+        }
+
+        .art-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns */
+            gap: 20px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .art-item {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .art-item img {
+            max-width: 90%;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .art-item img:hover {
+            transform: scale(1.1); /* Increase image size on hover */
+        }
+
+        .art-item p {
+            margin: 10px 0;
+        }
+
+        .steps-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 20px;
+            background-color: #f9f9f9;
+        }
+
+        .steps-section h2 {
+            margin-bottom: 30px;
+        }
+
+        .steps {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            text-align: center;
+            width: 200px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .step i {
+            font-size: 50px;
+            margin-bottom: 10px;
+            color: #010912;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            background-color: #C0C0C0;
+        }
+
+        .step:hover i {
+            color: #C0C0C0;
+        }
+
+        .collections-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 20px;
+        }
+
+        .collections-section h2 {
+            margin-bottom: 30px;
+        }
+
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns */
+            gap: 20px;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .collection-item {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .collection-item img {
+            max-width: 90%;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .collection-item img:hover {
+            transform: scale(1.1);
+        }
+
+        .collection-item p {
+            margin: 10px 0;
+        }
+
+        .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+        overflow: auto; /* Allows scrolling when modal is open */
+    }
+
+    .modal-content {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 600px;
+        width: 100%;
+        overflow-y: auto; /* Enables vertical scrolling inside modal */
+        max-height: 80vh; /* Ensure modal content doesn't overflow the screen */
+    }
+
+
+        .modal-content img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        .modal-content h2 {
+            margin-top: 20px;
+        }
+
+        .modal-content p {
+            margin-top: 10px;
+        }
+
+        .close-btn {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .close-btn:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #f1f1f1;
+            margin-top: 20px;
+        }
+
+        
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <h1>NFT Platform</h1>
+        <nav class="nav">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#collections">Collections</a>
+            <a href="login.html">Login</a>
+            <a href="#contact">Contact</a>
+            <a href="signup.html">Sign Up</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h1>Discover Rare Digital Art and Collect NFTs</h1>
+        <p>Explore unique and limited edition artworks, and join the world of NFTs.</p>
+        <button onclick="location.href='#collectionss'">EXPLORE NOW</button>
+
+    </div>
+
+    <section class="art-section" id="collections">
+        <h2>Explore Featured Artworks</h2>
+        <div class="art-grid">
+            <div class="art-item">
+                <img src="sample1.png" alt="Digital Art 1">
+                <p>Digital Horizon</p>
+                <p>Price: 1.5 ETH</p>
+            </div>
+            <div class="art-item">
+                <img src="sample2.png" alt="Digital Art 2">
+                <p>Infinite Bloom</p>
+                <p>Price: 2.2 ETH</p>
+            </div>
+            <div class="art-item">
+                <img src="sample3.jpg" alt="Digital Art 3">
+                <p>Stellar Genesis</p>
+                <p>Price: 0.8 ETH</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="steps-section">
+        <h2>How to Create and Sell Your NFTs</h2>
+        <div class="steps">
+            <div class="step">
+                <i class="fas fa-wallet"></i>
+                <h3>Set up your wallet</h3>
+                <p>Set up a digital wallet to store and manage your NFTs and cryptocurrency.</p>
+            </div>
+            <div class="step">
+                <i class="fas fa-box"></i>
+                <h3>Create Collection</h3>
+                <p>Group your NFTs into a collection for easy browsing and organization.</p>
+            </div>
+            <div class="step">
+                <i class="fas fa-upload"></i>
+                <h3>Add your NFTs</h3>
+                <p>Upload your digital artwork, add details, and create your NFT.</p>
+            </div>
+            <div class="step">
+                <i class="fas fa-tags"></i>
+                <h3>List them for sale</h3>
+                <p>Set your price and list your NFTs for sale on the platform.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- NFT Collections Section -->
+    <section class="collections-section" id="collectionss">
+        <h2>Featured NFT Collections</h2>
+        <div class="collections-grid">
+            <div class="collection-item" onclick="openModal('coll1.jpg', 'Digital Art 1', '1.5 ETH', 'An intricate digital masterpiece blending surrealism with vibrant colors. The piece captures an otherworldly landscape, with floating geometric shapes and glowing elements, invoking a sense of wonder and mystery.')">
+                <img src="coll1.jpg" alt="NFT 1">
+                <p>Nebula Dreamscape</p>
+                <p>1.5 ETH</p>
+            </div>
+            <div class="collection-item" onclick="openModal('coll2.jpg', 'Digital Art 2', '2.2 ETH', 'A stunning abstract composition that explores the beauty of chaos. With sharp lines and complex patterns, this artwork draws the viewer eyes and attention')">
+                <img src="coll2.jpg" alt="NFT 2">
+                <p>Quantum Vortex</p>
+                <p>2.2 ETH</p>
+            </div>
+            <div class="collection-item" onclick="openModal('coll3.jpg', 'Digital Art 3', '0.8 ETH', 'A futuristic digital portrait that challenges traditional notions of human identity. The artwork fuses human features with mechanical elements, exploring the intersection between organic and artificial intelligence.')">
+                <img src="coll3.jpg" alt="NFT 3">
+                <p>Ethereal Bloom</p>
+                <p>0.8 ETH</p>
+            </div>
+        </div>
+        <div class="collections-grid">
+          <div class="collection-item" onclick="openModal('coll4.jpg', 'Digital Art 1', '1.5 ETH', 'A minimalist design where simplicity speaks volumes. The artist uses soft gradients and geometric lines to evoke tranquility, offering a peaceful and meditative atmosphere in the digital space.')">
+              <img src="coll4.jpg" alt="NFT 1">
+              <p>Lunar Whisper</p>
+              <p>4 ETH</p>
+          </div>
+          <div class="collection-item" onclick="openModal('coll5.jpg', 'Digital Art 2', '2.2 ETH', 'Nature comes alive in this digital painting, with vibrant hues capturing the dynamic flow of natural landscapes. The artists use of motion gives the scene a sense of energy, as if the landscape itself is constantly shifting')">
+              <img src="coll5.jpg" alt="NFT 2">
+              <p>Holographic Reflections</p>
+              <p>2 ETH</p>
+          </div>
+          <div class="collection-item" onclick="openModal('coll6.jpg', 'Digital Art 3', '0.8 ETH', 'A colorful abstract work that reflects the fusion of culture and technology. The piece combines traditional patterns with modern digital elements, celebrating the evolving relationship between human heritage and technological advancements.')">
+              <img src="coll6.jpg" alt="NFT 3">
+              <p>Digital Oasis</p>
+              <p>3 ETH</p>
+          </div>
+      </div>
+    </section>
+
+    <!-- Modal for NFT details -->
+    <div class="modal" id="nftModal">
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="NFT Image">
+            <h2 id="modalTitle"></h2>
+            <p id="modalPrice"></p>
+            <p id="modalDescription"></p>
+            <button class="close-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+    
+  
+
+    <footer>
+       <p>&copy; 2025 NFT Platform. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function openModal(image, title, price, description) {
+            document.getElementById('modalImage').src = image;
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalPrice').innerText = price;
+            document.getElementById('modalDescription').innerText = description;
+            document.getElementById('nftModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('nftModal').style.display = 'none';
+        }
+    </script>
+    
+</body>
+
+</html>

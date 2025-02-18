@@ -1,0 +1,48 @@
+<% layout("layouts/boilerplate") %>
+<body>
+  <br><br>
+  <div class="row">
+    <div class="col-8 offset-2">
+      <h3>Edit Listing</h3>
+      <form method="POST" action="/listings/<%= listing._id %>?_method=PUT">
+        <div> 
+          <label for="title" class="form-label">Title</label>
+          <input name="listing[title]" value="<%= listing.title %>" placeholder="Enter title of art" type="text" class="form-control" required />
+        </div>
+        
+        <div>
+          <label for="description" class="form-label">Description</label>
+          <textarea id="description" name="listing[description]" class="form-control" required><%= listing.description %></textarea>
+          <button type="button" id="generate-btn" class="btn btn-secondary mt-2">Auto-Generate</button>
+        </div>
+        
+        <div>
+          <label for="image" class="form-label">Image</label>
+          <input name="listing[image]" value="<%= listing.image %>" placeholder="Enter image URL/Link" type="text" class="form-control" required />
+        </div>
+        
+        <div>
+          <label for="price" class="form-label">Price</label>
+          <input name="listing[price]" value="<%= listing.price %>" placeholder="Enter price of art" type="number" class="form-control" required />
+        </div>
+        
+        <button class="btn btn-dark" type="submit">Update Art</button>
+      </form>
+    </div>
+  </div>
+  
+  <br><br>
+
+  <script>
+    document.getElementById("generate-btn").addEventListener("click", async () => {
+      let descriptionField = document.getElementById("description");
+      let response = await fetch(`/generate-description?prompt=${encodeURIComponent(descriptionField.value)}`);
+      let data = await response.json();
+      if (data.description) {
+          descriptionField.value = data.description;
+      } else {
+          alert("AI failed to generate a description.");
+      }
+    });
+  </script>
+</body>
